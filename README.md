@@ -1,34 +1,38 @@
-# 📄 QuickCV, A Modern Professional CV Builder
+# 📄 QuickCV — Modern Professional CV Builder
 
-> A fast, interactive, and customizable CV Builder web application built with React, Vite, and Framer Motion.
->
+> A fast, interactive, and privacy-focused CV Builder web application built with React 19, Vite, Framer Motion, and @dnd-kit.
 
 ---
 
 ## ✨ Features
 
-- 📝 Live two-way form, type and see your CV update instantly
-- 🎨 Professional CV preview with dark header and accent colors
-- 🏷️ Skill badge generator, type skills that separated by typing comma
-- 📥 Download your CV as a PDF with one click
-- ⚡ Fast and lightweight app
+- 📝 **Live Two-Way Form** — Type in your details and watch your CV document update instantly in real time.
+- 🎨 **Multiple Professional Templates** — Switch effortlessly between **ATS Plain** (single-column, machine-readable), **Modern** (bold dark header), and **Minimal** (structured sidebar).
+- 📊 **Real-Time CV Completeness Meter** — Dynamic 0–100% score with status tiers (*Basic*, *Good*, *Strong*, *All-Star*) and smart actionable suggestions to optimize your resume.
+- 📱 **Mobile-First Responsive Design** — Fully optimized for mobile and tablet with a floating drawer toggle for seamless switching between form editing and live preview.
+- 🗂️ **Interactive Drag & Drop Reordering** — Reorder your Work Experience and Education timelines with fluid drag-and-drop powered by `@dnd-kit`.
+- 🏷️ **Skill Badge Generator** — Automatically formats comma-separated skills into clean, responsive visual badges.
+- ❓ **Animated FAQ Accordion** — Interactive FAQ on the landing page featuring smooth ease and micro-slide animations via Framer Motion.
+- 🎨 **Theme & Accent Customization** — Sleek *Royal Deep Blue* dark interface (`#081b33`), customizable CV accent swatches, and high-contrast *Snow White* resume paper.
+- 📥 **One-Click Vector PDF Export** — Utilizes browser-native `@media print` styling to export real selectable, searchable text—100% ATS scanner friendly.
+- 🔒 **100% Private & Client-Side** — Zero database, zero telemetry. All CV information is saved exclusively in your browser's `localStorage`.
 
 ---
 
 ## 🛠️ Tech Stack
 
 | Category | Technology | Purpose |
-| -------- | ----------------- | ------------------------------------------ |
-| Language | JavaScript (ES6+) | Core programming language |
-| Library | React 19 | UI components & state management |
-| Routing | React Router 7 | Client-side Single Page Application routing |
-| Animation| Framer Motion | Smooth page & UI transition animations |
-| Build | Vite 8 | Dev server, hot reload & production bundle |
-| Styling | Vanilla CSS | Dynamic themes & custom design tokens |
-| Tools | VS Code, Git, npm | Code editor, version control & packages |
-| Storage | localStorage | Client-side data persistence |
-
-> **Note:** This is a pure frontend project. No backend or database.
+| -------- | ---------- | ------- |
+| **Language** | JavaScript (ES6+) | Core programming language |
+| **Library** | React 19 | UI components & reactive state management |
+| **Routing** | React Router 7 | Client-side Single Page Application (SPA) routing |
+| **Animation** | Framer Motion | Smooth layout transitions, FAQ accordion, & route animations |
+| **Drag & Drop** | @dnd-kit | Accessible drag-and-drop for timeline entries |
+| **Icons** | Lucide React | Unified, lightweight SVG icon system |
+| **Build Tool** | Vite 8 | Ultra-fast dev server with HMR & optimized production bundling |
+| **Styling** | Vanilla CSS | Custom design tokens, `:root` variables, & `@media print` |
+| **Storage** | localStorage | Persistent client-side data storage |
+| **Deployment** | Vercel | Production hosting with live SPA redirects |
 
 ---
 
@@ -37,92 +41,68 @@
 Before running this project, ensure you have the following installed on your machine:
 - **Node.js** (v18 or higher)
 - **npm** (v9 or higher)
-- A modern web browser (Chrome, Firefox, Edge, Safari)
+- A modern web browser (Chrome, Edge, Firefox, Safari)
 
 ---
 
 ## 🚀 Getting Started
 
 ```bash
-# Clone the repo
+# 1. Clone the repository
 git clone https://github.com/Vizzly-nM09/CV-Builder.git
 
-# Enter the folder
+# 2. Navigate to project directory
 cd CV-Builder
 
-# Install dependencies
+# 3. Install dependencies
 npm install
 
-# Start the dev server
+# 4. Start the local development server
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser.
+Open `http://localhost:5173` in your browser to start building your CV.
 
 ---
 
 ## 📚 What I Learned
 
-This was my first React project, built from zero JavaScript knowledge. Here's everything I picked up along the way:
+This project was built from the ground up to master modern React and frontend engineering practices:
 
-### React Core
+### React Core & Architecture
+- **JSX & Reusable Components** — Modular architecture with separation of concerns between form controllers, template renderers, and landing page sections.
+- **Custom Hooks (`useCVData`)** — Centralized business logic, schema defaults, validation, and `localStorage` synchronization.
+- **Context API (`useCVContext`)** — Global broadcast state eliminating prop-drilling across multi-step wizard forms and preview components.
+- **Performance & Hooks** — Leveraged `useMemo` for parsing skills, `useRef` for DOM handles, and `React.memo` to eliminate unnecessary re-renders.
 
-- **JSX** — Writing HTML-like syntax inside JavaScript
-- **Components** — Breaking UI into reusable, single-responsibility pieces
-- **Props** — Passing data from parent to child components
-- **Conditional Rendering** — Showing/hiding UI with `&&` and ternary `? :`
-- **List Rendering** — Mapping arrays to JSX elements with `.map()` and `key`
+### Modern UI & Animation
+- **Framer Motion Micro-Interactions** — `<AnimatePresence>` for accordion height collapse/expansion, synchronized SVG chevron rotation, and route transitions.
+- **Accessible Drag & Drop (`@dnd-kit`)** — Sortable contexts, pointer sensors, and keyboard-accessible reordering.
+- **Responsive Layout Architecture** — Media queries, touch-friendly hit areas (≥44px), and collapsible drawer states for mobile viewports.
+- **Print Optimization (`@media print`)** — CSS rules that hide UI controls, remove backgrounds, and ensure exact A4 vector PDF pagination.
 
-### React Hooks
-
-- **`useState`** — Storing and updating reactive state
-- **`useEffect`** — Running side effects (localStorage sync, DOM attribute/style mutations)
-- **`useContext`** — Accessing global state without prop drilling
-- **`useMemo`** — Caching expensive computations (skills splitting)
-- **`useReducer`** — Centralized state management with actions and a reducer function
-- **`useRef`** — Referencing DOM elements directly
-
-### Architecture & Patterns
-
-- **Custom Hooks** — Extracting stateful logic into reusable `use*` functions (`useCVData`)
-- **Context API** — Creating a broadcast channel with `createContext` + `Provider`
-- **Component Extraction** — Refactoring a monolithic file into focused components
-- **Immutability** — Never mutating state directly; always copying with spread `...`
-- **`React.memo`** — Preventing unnecessary re-renders for prop-based components
-- **Framer Motion Animations** — `<AnimatePresence>` and `<motion.div>` for smooth route transitions
-
-### CSS
-
-- **Flexbox & Grid** — Building responsive two-column layouts and auto-fitting grids
-- **CSS Variables & Themes** — Design tokens in `:root` and `[data-theme]` for instant theme switching
-- **Utility Classes** — DRY principle with shared `.btn` base class
-- **`@media print`** — Custom print stylesheet for PDF downloads
-
-### Tooling
-
-- **Git** — Version control, commits, branching, and pushing to GitHub
-- **Vite** — Fast dev server with hot module replacement
-- **npm** — Installing, managing, and removing packages
+### Professional Git Workflow
+- **Branching & Pull Requests** — Feature branch development (`git checkout -b feature/name`), atomic commits, and GitHub CLI (`gh`) PR lifecycles.
 
 ---
 
 ## 🗺️ Roadmap
 
-- ✅ Multiple work experience entries
-- ✅ Multiple education entries
-- ✅ Multiple CV templates (ATS, Modern, Minimal)
-- ✅ Save data with localStorage
-- ✅ Entry reordering (Move Up / Move Down)
-- ✅ Advanced Drag & Drop reordering (@dnd-kit)
-- ✅ Advanced per-step form validation
-- ✅ CSS Variables & Utility Classes (clean code refactor)
-- ✅ Step-by-step form wizard with progress bar
-- ✅ React Router (Landing Page + Builder Page)
-- ✅ Dynamic App Interface Themes (Dark Pink, Light Green, Dracula)
-- ✅ Printed CV Template Accent Color Picker
-- ✅ cvmaker-inspired Landing Page Redesign
-- ✅ Page Transition Animations (framer-motion)
-- ✅ Checking and fixing for small/minor bug and some error
-- ✅ Deploy Live to Vercel
+### ✅ Completed
+- [x] Multi-step wizard form with step validation
+- [x] Multiple work experience & education entries
+- [x] Drag & Drop entry reordering (`@dnd-kit`)
+- [x] Instant client-side auto-save (`localStorage`)
+- [x] Dynamic app themes & CV accent color picker
+- [x] Real-time CV completeness score meter with tips
+- [x] Mobile-first responsive layout & drawer toggle
+- [x] Unified Lucide icon system
+- [x] Landing page with animated FAQ accordion & modern footer
+- [x] Vercel live deployment with SPA routing
 
----
+### ⏳ In Progress & Upcoming
+- [ ] Profile photo upload engine (client-side `FileReader` -> Base64 -> `localStorage`)
+- [ ] International template redesigns (Michael Harris ATS & Usman Ali Minimal)
+- [ ] Document font family selector (Sans-Serif vs Serif toggle)
+- [ ] Custom sections system (Projects, Certifications, Awards)
+- [ ] Multi-CV profiles manager (store and switch between 2–3 CV slots)
