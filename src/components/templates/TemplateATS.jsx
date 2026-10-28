@@ -1,4 +1,6 @@
 import { useCVContext } from "../../context/CVContext";
+import LinkedinIcon from "../LinkedinIcon";
+import { Mail, Phone } from "lucide-react";
 
 function TemplateATS({}) {
   const { cvData } = useCVContext();
@@ -8,7 +10,8 @@ function TemplateATS({}) {
       <div className="ats-header">
         <h1>{cvData.name}</h1>
         <p>
-          {cvData.email} | {cvData.phone}
+          {cvData.email} {cvData.phone && `| ${cvData.phone}`}{" "}
+          {cvData.linkedin && `| ${cvData.linkedin}`}
         </p>
       </div>
 

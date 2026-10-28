@@ -1,4 +1,5 @@
 import { useCVContext } from "../../context/CVContext";
+import LinkedinIcon from "../LinkedinIcon";
 
 function PersonalInfoForm() {
   // Ambil langsung dari context — tidak perlu props!
@@ -31,12 +32,25 @@ function PersonalInfoForm() {
       <label>Phone</label>
       <input
         name="phone"
+        type="tel"
+        maxLength={13}
         value={cvData.phone}
         onChange={handleChange}
         placeholder="e.g. 08123456789"
         className={errors.phone ? "input-error" : ""}
       />
       {errors.phone && <span className="error-msg">{errors.phone}</span>}
+
+      <label className="input-label-with-icon">
+        <LinkedinIcon size={14} /> LinkedIn URL
+      </label>
+
+      <input
+        name="linkedin"
+        value={cvData.linkedin || ""}
+        onChange={handleChange}
+        placeholder="e.g. linkedin.com/in/yourname"
+      />
 
       <label>Summary</label>
       <textarea

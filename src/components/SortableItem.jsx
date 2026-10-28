@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
 
 function SortableItem({ id, children }) {
   const {
@@ -21,7 +22,7 @@ function SortableItem({ id, children }) {
     borderRadius: "8px",
     overflow: "hidden",
     marginBottom: "8px",
-    backgroundColor: "var(--bg-card)"
+    backgroundColor: "var(--bg-card)",
   };
 
   return (
@@ -32,12 +33,11 @@ function SortableItem({ id, children }) {
         className="drag-header"
         title="Drag to reorder"
       >
-        ⠿ Drag to move
+        <GripVertical size={13} />
+        <span>Drag to reorder</span>
       </div>
 
-      <div className="sortable-content">
-        {children}
-      </div>
+      <div className="sortable-content">{children}</div>
     </div>
   );
 }

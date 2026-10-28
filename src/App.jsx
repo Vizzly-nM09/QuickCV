@@ -10,12 +10,22 @@ import ExperienceForm from "./components/forms/ExperienceForm";
 import EducationForm from "./components/forms/EducationForm";
 import SkillsForm from "./components/forms/SkillsForm";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowRight,
+  RotateCcw,
+  Download,
+  Eye,
+  X,
+} from "lucide-react";
+import CompletenessMeter from "./components/CompletenessMeter";
 
 function App() {
   const { selectedTemplate, setSelectedTemplate, validateStep, resetAll } =
     useCVContext();
 
   const [step, setStep] = useState(1);
+  const [isMobilePreviewOpen, setIsMobilePreviewOpen] = useState(false);
 
   const stepLabels = ["Personal Info", "Experience", "Education", "Skills"];
 
@@ -77,6 +87,9 @@ function App() {
     <div className="app-container">
       <main className="builder-layout">
         <section className="form-section">
+          {/* CV Completeness Score Meter */}
+          <CompletenessMeter />
+
           {/* Progress Bar */}
           <div className="wizard-progress">
             <div className="wizard-step-info">
@@ -99,7 +112,7 @@ function App() {
                 className="btn wizard-btn"
                 onClick={() => setStep(step - 1)}
               >
-                ← Back
+                <ArrowLeft size={16} /> Back
               </button>
             )}
             {step < stepLabels.length ? (
@@ -108,39 +121,63 @@ function App() {
                 onClick={() => {
                   const isValid = validateStep(step);
                   if (!isValid) return;
-
                   setStep(step + 1);
                 }}
               >
-                Next →
+                Next <ArrowRight size={16} />
               </button>
             ) : (
               <button className="btn clear-btn" onClick={resetAll}>
-                Clear All & Reset
+                <RotateCcw size={15} /> Clear All & Reset
               </button>
             )}
           </div>
         </section>
 
-        <section className="preview-section">
+        <button
+          className="mobile-preview-fab"
+          onClick={() => setIsMobilePreviewOpen(true)}
+          aria-label="Preview CV"
+        >
+          <Eye size={18} />
+          <span>Preview CV</span>
+        </button>
+        {isMobilePreviewOpen && (
+          <div
+            className="mobile-drawer-backdrop"
+            onClick={() => setIsMobilePreviewOpen(false)}
+          />
+        )}
+
+        <section
+          className={`preview-section ${isMobilePreviewOpen ? "drawer-open" : ""}`}
+        >
           <div className="preview-controls">
             <span className="preview-label-text">TEMPLATE SELECTOR</span>
-            <button
-              onClick={() => {
-                const isValid = validateStep(1);
-                if (isValid) window.print();
-              }}
-              className="btn download-btn"
-            >
-              Download PDF
-            </button>
+            <div className="preview-action-group">
+              <button
+                onClick={() => {
+                  const isValid = validateStep(1);
+                  if (isValid) window.print();
+                }}
+                className="btn download-btn"
+              >
+                <Download size={16} /> Download PDF
+              </button>
+              {/* Tombol Tutup Khusus Mobile */}
+              <button
+                className="drawer-close-btn"
+                onClick={() => setIsMobilePreviewOpen(false)}
+                aria-label="Close Preview"
+              >
+                <X size={20} />
+              </button>
+            </div>
           </div>
-
           <TemplateSelector
             selectedTemplate={selectedTemplate}
             onTemplateChange={setSelectedTemplate}
           />
-
           <div className="cv-document">{renderTemplate()}</div>
         </section>
       </main>

@@ -23,9 +23,5 @@ learning_journal.md
 *.njsproj
 *.sln
 *.sw?
-React lesson.md
 .agents
-QuickCV_V2_Study_Guide.md
-Phase 4 plan.md
-ui ux notes.md
-phase_4_ui_ux_pro_max_plan.md
+*.md

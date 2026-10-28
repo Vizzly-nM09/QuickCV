@@ -5,6 +5,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableItem from "../SortableItem";
+import { Trash2, ChevronUp, ChevronDown, Plus } from "lucide-react";
 
 function EducationForm() {
   const {
@@ -39,22 +40,24 @@ function EducationForm() {
                       className="btn remove-btn"
                       onClick={() => removeEducation(index)}
                     >
-                      ✕ Remove
+                      <Trash2 size={13} /> Remove
                     </button>
                     <div className="move-buttons">
                       <button
                         className="btn move-btn"
                         onClick={() => moveEducationUp(index)}
                         disabled={index === 0}
+                        title="Move Up"
                       >
-                        ↑
+                        <ChevronUp size={14} />
                       </button>
                       <button
                         className="btn move-btn"
                         onClick={() => moveEducationDown(index)}
                         disabled={index === cvData.educations.length - 1}
+                        title="Move Down"
                       >
-                        ↓
+                        <ChevronDown size={14} />
                       </button>
                     </div>
                   </div>
@@ -93,7 +96,7 @@ function EducationForm() {
         </SortableContext>
       </DndContext>
       <button className="btn add-btn" onClick={addEducation}>
-        + Add Education
+        <Plus size={15} /> Add Education
       </button>
       <hr />
     </div>

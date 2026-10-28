@@ -1,5 +1,7 @@
 import { useCVContext } from "../../context/CVContext";
 import { useMemo } from "react";
+import { Mail, Phone } from "lucide-react";
+import LinkedinIcon from "../LinkedinIcon";
 
 function TemplateModern({}) {
   const { cvData } = useCVContext();
@@ -20,8 +22,21 @@ function TemplateModern({}) {
           {cvData.experiences[0]?.jobTitle || "Your Job Title"}
         </p>
         <div className="modern-contacts">
-          {cvData.email && <span>✉ {cvData.email}</span>}
-          {cvData.phone && <span>📞 {cvData.phone}</span>}
+          {cvData.email && (
+            <span className="modern-contact-item">
+              <Mail size={13} /> {cvData.email}
+            </span>
+          )}
+          {cvData.phone && (
+            <span className="modern-contact-item">
+              <Phone size={13} /> {cvData.phone}
+            </span>
+          )}
+          {cvData.linkedin && (
+            <span className="modern-contact-item">
+              <LinkedinIcon size={13} /> {cvData.linkedin}
+            </span>
+          )}
         </div>
       </div>
 

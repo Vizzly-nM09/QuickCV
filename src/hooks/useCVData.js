@@ -10,6 +10,7 @@ export function useCVData() {
           name: "",
           email: "",
           phone: "",
+          linkedin: "",
           summary: "",
           skills: "",
           experiences: [
@@ -53,8 +54,14 @@ export function useCVData() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setCvData({ ...cvData, [name]: value });
 
+    // Filter khusus jika field phone, selain itu pakai value biasa
+    const finalValue =
+      name === "phone" ? value.replace(/[^0-9+\s-]/g, "").slice(0, 15) : value;
+
+    setCvData({ ...cvData, [name]: finalValue });
+
+    // Pesan error phone sekarang bisa terhapus otomatis saat diketik!
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
@@ -167,6 +174,7 @@ export function useCVData() {
       name: "",
       email: "",
       phone: "",
+      linkedin: "",
       summary: "",
       skills: "",
       experiences: [{ jobTitle: "", company: "", workYear: "" }],

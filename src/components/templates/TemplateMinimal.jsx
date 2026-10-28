@@ -1,5 +1,7 @@
 import { useCVContext } from "../../context/CVContext";
 import { useMemo } from "react";
+import { Mail, Phone } from "lucide-react";
+import LinkedinIcon from "../LinkedinIcon";
 
 function TemplateMinimal({}) {
   const { cvData } = useCVContext();
@@ -21,8 +23,21 @@ function TemplateMinimal({}) {
 
           <div className="minimal-section">
             <h3>Contact</h3>
-            {cvData.email && <p>{cvData.email}</p>}
-            {cvData.phone && <p>{cvData.phone}</p>}
+            {cvData.email && (
+              <p className="minimal-contact-item">
+                <Mail size={13} /> {cvData.email}
+              </p>
+            )}
+            {cvData.phone && (
+              <p className="minimal-contact-item">
+                <Phone size={13} /> {cvData.phone}
+              </p>
+            )}
+            {cvData.linkedin && (
+              <p className="minimal-contact-item">
+                <LinkedinIcon size={13} /> {cvData.linkedin}
+              </p>
+            )}
           </div>
 
           {cvData.skills && (
