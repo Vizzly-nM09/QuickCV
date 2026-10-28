@@ -11,6 +11,7 @@ const ACCENT_COLORS = [
 
 function TemplateSelector({ selectedTemplate, onTemplateChange }) {
   const { cvAccentColor, setCvAccentColor } = useCVContext();
+
   return (
     <div className="template-selector-wrapper">
       {/* Template Radio Buttons */}
@@ -46,23 +47,27 @@ function TemplateSelector({ selectedTemplate, onTemplateChange }) {
           <span>Minimal (Sidebar)</span>
         </label>
       </div>
-      {/* CV Accent Color Swatches */}
-      <div className="cv-color-picker">
-        <span className="color-picker-label">Accent Color:</span>
-        <div className="color-swatches">
-          {ACCENT_COLORS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className={`theme-swatch ${cvAccentColor === item.color ? "active" : ""}`}
-              style={{ backgroundColor: item.color }}
-              onClick={() => setCvAccentColor(item.color)}
-              title={item.label}
-            />
-          ))}
+
+      {/* CV Accent Color Swatches - Hanya tampil untuk template yang mendukung warna (bukan ATS) */}
+      {selectedTemplate !== "ats" && (
+        <div className="cv-color-picker">
+          <span className="color-picker-label">Accent Color:</span>
+          <div className="color-swatches">
+            {ACCENT_COLORS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`theme-swatch ${cvAccentColor === item.color ? "active" : ""}`}
+                style={{ backgroundColor: item.color }}
+                onClick={() => setCvAccentColor(item.color)}
+                title={item.label}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
+
 export default memo(TemplateSelector);

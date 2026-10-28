@@ -17,26 +17,39 @@ function TemplateModern({}) {
     <div className="cv-modern">
       {/* Dark Header */}
       <div className="modern-header">
-        <h1>{cvData.name}</h1>
-        <p className="modern-title">
-          {cvData.experiences[0]?.jobTitle || "Your Job Title"}
-        </p>
-        <div className="modern-contacts">
-          {cvData.email && (
-            <span className="modern-contact-item">
-              <Mail size={13} /> {cvData.email}
-            </span>
+        <div className="modern-header-content">
+          {cvData.photo && (
+            <div className="modern-photo-container">
+              <img
+                src={cvData.photo}
+                alt={cvData.name}
+                className="modern-photo"
+              />
+            </div>
           )}
-          {cvData.phone && (
-            <span className="modern-contact-item">
-              <Phone size={13} /> {cvData.phone}
-            </span>
-          )}
-          {cvData.linkedin && (
-            <span className="modern-contact-item">
-              <LinkedinIcon size={13} /> {cvData.linkedin}
-            </span>
-          )}
+          <div className="modern-header-text">
+            <h1>{cvData.name}</h1>
+            <p className="modern-title">
+              {cvData.experiences[0]?.jobTitle || "Your Job Title"}
+            </p>
+            <div className="modern-contacts">
+              {cvData.email && (
+                <span className="modern-contact-item">
+                  <Mail size={13} /> {cvData.email}
+                </span>
+              )}
+              {cvData.phone && (
+                <span className="modern-contact-item">
+                  <Phone size={13} /> {cvData.phone}
+                </span>
+              )}
+              {cvData.linkedin && (
+                <span className="modern-contact-item">
+                  <LinkedinIcon size={13} /> {cvData.linkedin}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 

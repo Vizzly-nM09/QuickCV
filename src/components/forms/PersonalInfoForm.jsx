@@ -1,13 +1,69 @@
 import { useCVContext } from "../../context/CVContext";
 import LinkedinIcon from "../LinkedinIcon";
+import { useRef } from "react";
+import { Camera, Upload, Trash2 } from "lucide-react";
 
 function PersonalInfoForm() {
-  // Ambil langsung dari context — tidak perlu props!
-  const { cvData, handleChange, errors } = useCVContext();
+  const { cvData, handleChange, errors, handlePhotoUpload, removePhoto } =
+    useCVContext();
+  const fileInputRef = useRef(null);
 
   return (
     <div>
       <h2>Personal Info</h2>
+
+      {/* Area Upload Foto Profil */}
+      <div className="photo-upload-container">
+        <div className="photo-avatar-preview">
+          {cvData.photo ? (
+            <img
+              src={cvData.photo}
+              alt="Profile Preview"
+              className="photo-preview-img"
+            />
+          ) : (
+            <div className="photo-placeholder">
+              <Camera size={28} />
+            </div>
+          )}
+        </div>
+
+        <div className="photo-actions">
+          {/* Input file disembunyikan dan dipicu oleh tombol */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handlePhotoUpload}
+            accept="image/*"
+            style={{ display: "none" }}
+          />
+
+          <div className="photo-btn-group">
+            <button
+              type="button"
+              className="photo-btn upload"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <Upload size={14} />
+              <span>{cvData.photo ? "Ganti Foto" : "Unggah Foto"}</span>
+            </button>
+
+            {cvData.photo && (
+              <button
+                type="button"
+                className="photo-btn remove"
+                onClick={removePhoto}
+                title="Hapus Foto"
+              >
+                <Trash2 size={14} />
+                <span>Hapus</span>
+              </button>
+            )}
+          </div>
+
+          <p className="photo-hint">Format JPG, PNG, atau WebP (Maks. 2MB)</p>
+        </div>
+      </div>
 
       <label>Full name</label>
       <input

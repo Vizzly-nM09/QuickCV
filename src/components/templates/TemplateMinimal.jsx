@@ -17,6 +17,15 @@ function TemplateMinimal({}) {
     <div className="cv-minimal">
       <div className="minimal-container">
         <div className="minimal-sidebar">
+          {cvData.photo && (
+            <div className="minimal-photo-container">
+              <img
+                src={cvData.photo}
+                alt={cvData.name}
+                className="minimal-photo"
+              />
+            </div>
+          )}
           <div className="minimal-name">
             <h1>{cvData.name}</h1>
           </div>

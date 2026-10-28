@@ -11,6 +11,7 @@ export function useCVData() {
           email: "",
           phone: "",
           linkedin: "",
+          photo: "",
           summary: "",
           skills: "",
           experiences: [
@@ -65,6 +66,32 @@ export function useCVData() {
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
+  }
+
+  function handlePhotoUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Harap pilih berkas gambar yang sesuai (JPG, PNG atau WebP).");
+      return;
+    }
+
+    const MAX_SIZE_MB = 2;
+    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+      alert(`Ukuran foto terlalu besar. Maksimal ${MAX_SIZE_MB}MB.`);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setCvData((prev) => ({ ...prev, photo: event.target.result }));
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removePhoto() {
+    setCvData((prev) => ({ ...prev, photo: null }));
   }
 
   function handleExpChange(index, e) {
@@ -175,6 +202,7 @@ export function useCVData() {
       email: "",
       phone: "",
       linkedin: "",
+      photo: "",
       summary: "",
       skills: "",
       experiences: [{ jobTitle: "", company: "", workYear: "" }],
@@ -250,5 +278,7 @@ export function useCVData() {
     setAppTheme,
     cvAccentColor,
     setCvAccentColor,
+    handlePhotoUpload,
+    removePhoto,
   };
 }
